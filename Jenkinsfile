@@ -6,8 +6,8 @@ pipeline {
             steps {
                 echo 'Building..'
                 docker info
-                docker build -t tchit/jenkins:${BUILD_NUMBER} .
-                docker tag tchit/jenkins:${BUILD_NUMBER} tchit/jenkins:latest
+                docker build -t tchit/jenkins-flask:${BUILD_NUMBER} ./flask
+                docker tag tchit/jenkins-flask:${BUILD_NUMBER} tchit/jenkins-flask:latest
                 docker images
             }
         }
