@@ -5,10 +5,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                docker info
-                docker build -t tchit/jenkins-flask:${BUILD_NUMBER} ./flask
-                docker tag tchit/jenkins-flask:${BUILD_NUMBER} tchit/jenkins-flask:latest
-                docker images
+                sh 'docker info'
+                sh 'docker build -t tchit/jenkins-flask:${BUILD_NUMBER} ./flask'
+                sh 'docker tag tchit/jenkins-flask:${BUILD_NUMBER} tchit/jenkins-flask:latest'
+                sh 'docker images'
             }
         }
         stage('Test') {
