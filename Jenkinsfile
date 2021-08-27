@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 script { 
-                    dockerImage = docker.build(registry + ":$BUILD_NUMBER", "./flask/Dockerfile")
+                    dockerImage = docker.build(registry + ":$BUILD_NUMBER", "./flask")
                 }
                 //sh 'docker info'
                 //sh 'docker build -t tchit/jenkins-flask:${BUILD_NUMBER} ./flask'
