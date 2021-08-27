@@ -29,8 +29,9 @@ pipeline {
                 echo 'Deploying....'
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
-                    dockerImage.push() 
+                        dockerImage.push() 
                     }
+                }
             }
         }
         stage('Cleaning up') { 
