@@ -1,21 +1,22 @@
 pipeline {
+    environment { 
+        registry = "tchit/jenkins-flask" 
+        registryCredential = 'dockerhub'
+        dockerImage = '' 
+    }
     agent any
-
+   
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'docker info'
-                sh 'docker build -t tchit/jenkins-flask:${BUILD_NUMBER} ./flask'
-                sh 'docker tag tchit/jenkins-flask:${BUILD_NUMBER} tchit/jenkins-flask:latest'
-                sh 'docker images'
-                sh 'docker login -u '
-                withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    usr = USERNAME
-                    pswd = PASSWORD
+                script { 
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
-                sh 'docker login -u ${usr} -p ${pswd}'
-                sh 'docker push tchit/jenkins-flask:${BUILD_NUMBER}'
+                //sh 'docker info'
+                //sh 'docker build -t tchit/jenkins-flask:${BUILD_NUMBER} ./flask'
+                //sh 'docker tag tchit/jenkins-flask:${BUILD_NUMBER} tchit/jenkins-flask:latest'
+                //sh 'docker images'
             }
         }
         stage('Test') {
@@ -26,7 +27,16 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                    dockerImage.push() 
+                    }
             }
         }
+        stage('Cleaning up') { 
+            steps { 
+                sh "docker rmi $registry:$BUILD_NUMBER" 
+            }
+        } 
     }
 }
