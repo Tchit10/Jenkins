@@ -9,9 +9,11 @@ pipeline {
                 sh 'docker build -t tchit/jenkins-flask:${BUILD_NUMBER} ./flask'
                 sh 'docker tag tchit/jenkins-flask:${BUILD_NUMBER} tchit/jenkins-flask:latest'
                 sh 'docker images'
-                docker.withRegistry( 'tchit/jenkins-flask', 'dockerhub' ) {
-                    dockerImage = 'tchit/jenkins-flask:${BUILD_NUMBER}'
-                    dockerImage.push()
+                script{
+                    docker.withRegistry( 'tchit/jenkins-flask', 'dockerhub' ) {
+                        dockerImage = 'tchit/jenkins-flask:${BUILD_NUMBER}'
+                        dockerImage.push()
+                    }
                 }
             }
         }
