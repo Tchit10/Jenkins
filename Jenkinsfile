@@ -36,5 +36,10 @@ pipeline {
                 sh "docker rmi $registry:$BUILD_NUMBER" 
             }
         } 
+        //stage('Ansible') {
+        //    step {
+        //        ansiblePlaybook become: true, becomeUser: 'jenkins', credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory.inv', playbook: 'playbook.yml'
+        //    }
+       //}
     }
 }
