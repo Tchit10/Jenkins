@@ -36,10 +36,10 @@ pipeline {
                 sh "docker rmi $registry:$BUILD_NUMBER" 
             }
         } 
-        //stage('Ansible') {
-        //    step {
-        //        ansiblePlaybook becomeUser: 'debian', credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory.inv', playbook: 'playbook.yml', limite: 'all'
-        //    }
-       //}
+        stage('Ansible') {
+            step {
+                ansiblePlaybook becomeUser: 'debian', credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory.inv', playbook: 'playbook.yml', limite: 'all'
+            }
+       }
     }
 }
