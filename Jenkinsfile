@@ -38,7 +38,7 @@ pipeline {
         } 
         stage('Ansible') {
             steps {
-                ansiblePlaybook becomeUser: 'debian', credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory.inv', playbook: 'playbook.yml', limit: 'all'
+                ansiblePlaybook becomeUser: 'debian', credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory.yml', playbook: 'playbook.yml', limit: 'all'
             }
         }
     }
