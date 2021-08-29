@@ -38,7 +38,7 @@ pipeline {
         } 
         //stage('Ansible') {
         //    step {
-        //        ansiblePlaybook become: true, becomeUser: 'jenkins', credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory.inv', playbook: 'playbook.yml'
+        //        ansiblePlaybook becomeUser: 'debian', credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory.inv', playbook: 'playbook.yml', limite: 'all'
         //    }
        //}
     }
