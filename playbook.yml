@@ -1,0 +1,20 @@
+---
+- name: "Run the Flask server with docker-compose"
+  hosts: web
+  tasks:
+    - name: "Copy the docker-compose file"
+      copy:
+        src: ./docker-compose.yml
+        dest: "/home/debian/OVH/jenkins2/docker-compose.yml"
+     
+    - name: "Stop current docker-compose instance"
+      become: True
+      shell:
+        chdir: "/home/debian/OVH/jenkins2"
+        cmd: docker-compose down
+    
+    - name: "Run new docker-compose instance"
+      become: True
+      shell:
+        chdir: "/home/debian/OVH/jenkins2"
+        cmd: docker-compose pull web && docker-compose up -d
