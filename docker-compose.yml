@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  web:
+    image: tchit/jenkins-flask:latest
+    container_name: jenkins-flask
+    ports:
+      - 5010:5000
