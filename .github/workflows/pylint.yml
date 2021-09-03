@@ -19,4 +19,4 @@ jobs:
         pip install pylint Flask==2.0.1
     - name: Analysing the code with pylint
       run: |
-        pylint flask/flaskhello.py
+        pylint flask/flaskhello.py --disable=missing-docstring
