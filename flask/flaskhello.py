@@ -1,5 +1,9 @@
 from flask import Flask
 
+"""
+Little Web App for tests.
+"""
+
 app = Flask(__name__)
 
 @app.route('/')
